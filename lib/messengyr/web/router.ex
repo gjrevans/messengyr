@@ -16,9 +16,8 @@ defmodule Messengyr.Web.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug :fetch_session
-    plug Guardian.Plug.VerifySession # Check if the user is logged in
-    plug Guardian.Plug.LoadResource # Check who is logged in
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.LoadResource
   end
 
   scope "/", Messengyr.Web do

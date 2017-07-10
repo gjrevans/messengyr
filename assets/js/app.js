@@ -1,33 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'whatwg-fetch';
 
-// Add these imports:
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
 import ChatContainer from "./components/chat-container";
 import MenuContainer from "./components/menu-container";
 
-import DATA from './fake-data'; // Add this line!
+import rooms from './reducers';
+
+// Our store:
+const store = createStore(rooms);
 
 class App extends React.Component {
   render() {
-    // Extract the data:
-    const ROOMS = DATA.rooms;
-    const MESSAGES = DATA.rooms[0].messages;
-
     // Pass the relevant data as props:
     return (
       <div>
-        <MenuContainer
-          rooms={ROOMS}
-        />
-        <ChatContainer
-          messages={MESSAGES}
-        />
+        <MenuContainer />
+        <ChatContainer />
       </div>
     )
   }
 }
 
 ReactDOM.render(
-  <App />,
+  // The app must be wrapped in a provider so that it can
+  // Access the store we created with redux
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('app'),
 );

@@ -59,6 +59,6 @@ exports.config = {
 
   npm: {
     enabled: true,
-    whitelist: ["react", "react-dom"]
+    whitelist: ["react", "react-dom", "whatwg-fetch", "moment", "redux", "react-redux"]
   }
 };
