@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :messengyr, Messengyr.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "messengyr_test",
+  username: "messengyr",
+  password: "password",
+  database: "messengyr_dev",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
