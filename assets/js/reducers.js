@@ -1,5 +1,25 @@
 // Our reduces talk to state to let it know if it should
 // update and what to change
+
+
+// We create a new function to take care
+// of the state of a room's messages:
+//// We create a new function to take care
+// of the state of a room's messages:
+export const messages = (state = [], action) => {
+  switch (action.type) {
+    case "ADD_MESSAGE":
+      // Add the new message to the list of messages:
+      return [
+        ...state,
+        action.message,
+      ];
+
+    default:
+      return state;
+  }
+};
+
 const room = (state, action) => {
   switch (action.type) {
     case "SELECT_ROOM":
@@ -7,6 +27,15 @@ const room = (state, action) => {
 
       return Object.assign({}, state, {
         isActive,
+      });
+
+    case "ADD_MESSAGE":
+      if (state.id !== action.roomId) {
+        return state;
+      }
+
+      return Object.assign({}, state, {
+        messages: messages(state.messages, action)
       });
 
     default:
@@ -20,9 +49,7 @@ const rooms = (state = [], action) => {
       return action.rooms;
 
     case "SELECT_ROOM":
-      // Loop through the rooms:
       return state.map(r => {
-        // Determine the state of each room:
         return room(r, action);
       });
 
@@ -31,6 +58,11 @@ const rooms = (state = [], action) => {
         action.room,
         ...state,
       ];
+
+    case "ADD_MESSAGE":
+      return state.map(r => {
+        return room(r, action);
+      });
 
     default:
       return state;

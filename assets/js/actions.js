@@ -7,7 +7,6 @@ export function setRooms(rooms) {
   }
 };
 
-// This action allows us to set a room as the active room
 export function selectRoom(roomId) {
   return {
     type: "SELECT_ROOM",
@@ -19,5 +18,13 @@ export function addRoom(room) {
   return {
     type: "ADD_ROOM",
     room,
+  }
+};
+
+export function addMessage(message, roomId) {
+  return {
+    type: "ADD_MESSAGE",
+    message,
+    roomId,
   }
 };

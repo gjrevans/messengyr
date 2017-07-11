@@ -51,7 +51,7 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :messengyr, Messengyr.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "gjrevans",
+  username: "messengyr",
   password: "password",
   database: "messengyr_dev",
   hostname: "localhost",
